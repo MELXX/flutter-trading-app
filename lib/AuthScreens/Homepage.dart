@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: EdgeInsets.all(10),
               child: Image(
-                image: AssetImage('coin-exchange-2427.png'),
+                image: AssetImage('Assets/coin-exchange-2427.png'),
                 width: MediaQuery.of(context).size.width * 0.45,
                 height: MediaQuery.of(context).size.width * 0.45,
               ),

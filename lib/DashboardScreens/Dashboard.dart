@@ -1,4 +1,6 @@
-import 'dart:html';
+
+
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,14 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
+  HttpClient client = new HttpClient();
+  List<Widget> v = <Widget>[
+    Container(
+      padding: const EdgeInsets.all(8),
+      child: const Text("He'd have you all unravel at the"),
+      color: Colors.teal[100],
+    ),
+  ];
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -53,38 +63,7 @@ class _DashboardState extends State<Dashboard> {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         crossAxisCount: 2,
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: const Text("He'd have you all unravel at the"),
-            color: Colors.teal[100],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: const Text('Heed not the rabble'),
-            color: Colors.teal[200],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: const Text('Sound of screams but the'),
-            color: Colors.teal[300],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: const Text('Who scream'),
-            color: Colors.teal[400],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: const Text('Revolution is coming...'),
-            color: Colors.teal[500],
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: const Text('Revolution, they...'),
-            color: Colors.teal[600],
-          ),
-        ],
+        children: v
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -93,12 +72,16 @@ class _DashboardState extends State<Dashboard> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.bar_chart),
+            label: 'Market',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.data_saver_off),
+            label: 'Trades',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.trending_up),
+            label: 'Long/Short',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -114,7 +97,13 @@ class _DashboardState extends State<Dashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          v.add(Container(
+            padding: const EdgeInsets.all(8),
+            child: const Text("ADDED NOW"),
+            color: Colors.teal[100],
+          ),);
+          setState(() {
+          });
         },
         child: const Icon(Icons.add_outlined),
         backgroundColor: Colors.amber,
