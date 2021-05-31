@@ -1,5 +1,4 @@
-
-
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
-  HttpClient client = new HttpClient();
   List<Widget> v = <Widget>[
     Container(
       padding: const EdgeInsets.all(8),
@@ -22,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
     ),
   ];
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
@@ -58,13 +56,12 @@ class _DashboardState extends State<Dashboard> {
       ),
       backgroundColor: DefaultVars.AppBackground,
       body: GridView.count(
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
-        children: v
-      ),
+          primary: false,
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
+          children: v),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -97,12 +94,29 @@ class _DashboardState extends State<Dashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          v.add(Container(
-            padding: const EdgeInsets.all(8),
-            child: const Text("ADDED NOW"),
-            color: Colors.teal[100],
-          ),);
-          setState(() {
+          v.add(
+            Container(
+              padding: const EdgeInsets.all(8),
+              child: const Text("ADDED NOW"),
+              color: Colors.teal[100],
+            ),
+          );
+          setState(() {});
+          HttpClient client = new HttpClient();
+          var vv = client
+              .getUrl(Uri.parse(
+                  "https://api.binance.com/api/v3/ticker/price?symbol=XRPUSDT"))
+              .then((HttpClientRequest request) {
+            // Optionally set up headers...
+            // Optionally write to the request object...
+            // Then call close.
+
+            return request.close();
+          }).then((HttpClientResponse response) {
+            response.transform(utf8.decoder).listen((contents) {
+              // handle data
+              print(contents);
+            });
           });
         },
         child: const Icon(Icons.add_outlined),
