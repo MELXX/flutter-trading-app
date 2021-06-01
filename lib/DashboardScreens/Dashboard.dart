@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../AppDefaults.dart';
+import 'Market.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -12,6 +13,8 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
+  HttpClient client = new HttpClient();
+
   List<Widget> v = <Widget>[
     Container(
       padding: const EdgeInsets.all(8),
@@ -40,58 +43,88 @@ class _DashboardState extends State<Dashboard> {
     ),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    print("hgjhjh");
+    client = new HttpClient();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: Text(DefaultVars.AppTitle),
       ),
       backgroundColor: DefaultVars.AppBackground,
-      body: GridView.count(
+      body: /*GridView.count(
           primary: false,
           padding: const EdgeInsets.all(20),
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           crossAxisCount: 2,
-          children: v),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: 'Market',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.data_saver_off),
-            label: 'Trades',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.trending_up),
-            label: 'Long/Short',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        //selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-        fixedColor: Colors.amber,
-        backgroundColor: Colors.amber,
-        unselectedItemColor: Colors.amber,
+          children: v
+      ),*/
+      FutureBuilder<HttpClientResponse>(
+        future: client
+            .getUrl(Uri.parse(
+            "https://api.binance.com/api/v3/ticker/price?symbol=XRPUSDT"))
+            .then((HttpClientRequest request) {
+          // Optionally set up headers...
+          // Optionally write to the request object...
+          // Then call close.
+
+          return request.close();
+        }),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+
+
+              snapshot.data?.transform(utf8.decoder).listen((contents) {
+                // handle data
+                print(contents);
+                v.add(Container(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(contents),
+                  color: Colors.teal[100],
+                ),);
+              });
+            return GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                children: v
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+
+          // By default, show a loading spinner.
+          return CircularProgressIndicator();
+        },
       ),
+      bottomNavigationBar: DefaultVars.getBottom(0 ,(int index) {
+        print(index);
+        setState(() {
+          _selectedIndex = index;
+
+          switch(index){
+            case 0:
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Dashboard()));
+              break;
+            case 1:
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Market()));
+              break;
+            case 2:
+            // do something
+              break;
+            case 3:
+            // do something else
+              break;
+            case 4:
+            // do something else
+              break;
+          }
+        });
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           v.add(
@@ -101,22 +134,8 @@ class _DashboardState extends State<Dashboard> {
               color: Colors.teal[100],
             ),
           );
-          setState(() {});
-          HttpClient client = new HttpClient();
-          var vv = client
-              .getUrl(Uri.parse(
-                  "https://api.binance.com/api/v3/ticker/price?symbol=XRPUSDT"))
-              .then((HttpClientRequest request) {
-            // Optionally set up headers...
-            // Optionally write to the request object...
-            // Then call close.
+          setState(() {
 
-            return request.close();
-          }).then((HttpClientResponse response) {
-            response.transform(utf8.decoder).listen((contents) {
-              // handle data
-              print(contents);
-            });
           });
         },
         child: const Icon(Icons.add_outlined),
