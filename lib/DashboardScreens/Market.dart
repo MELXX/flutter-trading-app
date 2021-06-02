@@ -110,13 +110,51 @@ class _MarketState extends State<Market> {
             ),
           ),
           Card(
+            elevation: 10.0,
             child: Row(
-              
+              children: <Widget>[
+                Text("...........")
+              ],
             ),
           ),
-          Card(),
-          Card(),
-          Card(),
+          Card(
+            child: Row(
+              children: <Widget>[
+                Text("...........")
+              ],
+            ),
+          ),
+          Card(
+            child: Row(
+              children: <Widget>[
+                Text("...........")
+              ],
+            ),
+          ),
+          Card(
+            child: Row(
+              children: <Widget>[
+                Text(DefaultVars.priceData[0]),
+                ImageIcon(
+                  Image(
+                    image: AssetImage('Assets/coin-exchange-2427.png'),
+                   // width: MediaQuery.of(context).size.width * 0.45,
+                   // height: MediaQuery.of(context).size.width * 0.45,
+                  ).image
+                ),
+                TextButton(onPressed: (){}, child: Text(""),style: ButtonStyle(
+                  side: MaterialStateProperty.all<BorderSide>(
+                      BorderSide(color: Colors.black)),
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.red),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                  textStyle: MaterialStateProperty.all<TextStyle>(
+                      TextStyle(fontSize: 25)),
+
+                ),)
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: DefaultVars.getBottom(1, (int index) {

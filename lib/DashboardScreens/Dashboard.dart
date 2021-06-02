@@ -78,6 +78,7 @@ class _DashboardState extends State<Dashboard> {
 
               snapshot.data?.transform(utf8.decoder).listen((contents) {
                 // handle data
+                DefaultVars.priceData.add(contents);
                 print(contents);
                 v.add(Container(
                   padding: const EdgeInsets.all(8),

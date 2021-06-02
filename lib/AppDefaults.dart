@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'DashboardScreens/Market.dart';
 
 class DefaultVars{
+  static List<String> priceData = [];
+
   static const Color AppBackground = Colors.blueGrey;
   static const Color TextColor = Colors.white;
   static const Color BtnColor = Colors.amber;
@@ -38,5 +40,4 @@ class DefaultVars{
       unselectedItemColor: Colors.amber,
     );;
   }
-
 }
