@@ -10,37 +10,38 @@ class Market extends StatefulWidget {
 
 class _MarketState extends State<Market> {
   var _selectedIndex = 1;
-  void _onItemTapped(int index) {
-    print(index);
-    setState(() {
-      _selectedIndex = index;
-      switch (index) {
-        case 0:
-          // do something
-          break;
-        case 1:
-          // do something else
-          break;
-        case 2:
-          // do something
-          break;
-        case 3:
-          // do something else
-          break;
-        case 4:
-          // do something else
-          break;
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     String dropdownValue = 'XRPUSD';
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 10,
         elevation: 0,
-        title: Text(DefaultVars.AppTitle),
+        leading: Container(
+          child: DropdownButton<String>(
+            isExpanded: true,
+            value: dropdownValue,
+            icon: const Icon(Icons.arrow_downward),
+            iconSize: 24,
+            elevation: 16,
+            style: const TextStyle(color: Colors.black),
+
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue!;
+              });
+            },
+            items: <String>['XRPUSD', 'DOGEUSD', 'ETHUSD', 'XLMUSD']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ),
+        //title: Text(DefaultVars.AppTitle),
       ),
       backgroundColor: DefaultVars.AppBackground,
       body: Column(
@@ -80,7 +81,7 @@ class _MarketState extends State<Market> {
                 ),
               ],
             ),
-          ElevatedButton(
+          /*ElevatedButton(
             style: ButtonStyle(
               backgroundColor:
               MaterialStateProperty.all<Color>(DefaultVars.BtnColor),
@@ -108,7 +109,7 @@ class _MarketState extends State<Market> {
                 );
               }).toList(),
             ),
-          ),
+          ),*/
           Card(
             elevation: 10.0,
             child: Row(
@@ -134,7 +135,7 @@ class _MarketState extends State<Market> {
           Card(
             child: Row(
               children: <Widget>[
-                Text(DefaultVars.priceData[0]),
+                Text("XRPUSD: 0.0111236"),//DefaultVars.priceData[0]),
                 ImageIcon(
                   Image(
                     image: AssetImage('Assets/coin-exchange-2427.png'),

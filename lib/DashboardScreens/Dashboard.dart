@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-
 import '../AppDefaults.dart';
 import 'Market.dart';
 
@@ -13,8 +11,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
-  HttpClient client = new HttpClient();
-
+  //HttpClient client = new HttpClient();
   List<Widget> v = <Widget>[
     Container(
       padding: const EdgeInsets.all(8),
@@ -22,46 +19,28 @@ class _DashboardState extends State<Dashboard> {
       color: Colors.teal[100],
     ),
   ];
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
-  ];
-
-
   @override
   Widget build(BuildContext context) {
-    client = new HttpClient();
+    //client = new HttpClient();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: Text(DefaultVars.AppTitle),
       ),
       backgroundColor: DefaultVars.AppBackground,
-      body: /*GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          children: v
-      ),*/
-      FutureBuilder<HttpClientResponse>(
+      body: Column(
+        children: <Widget>[
+          Container(
+            child: Text(
+                'Hello,\nMr XXXXXXXXXX',
+              style: TextStyle(
+                color: Colors.black
+              ),
+            ),
+          ),
+        ],
+      ),
+      /*FutureBuilder<HttpClientResponse>(
         future: client
             .getUrl(Uri.parse(
             "https://api.binance.com/api/v3/ticker/price?symbol=XRPUSDT"))
@@ -101,7 +80,7 @@ class _DashboardState extends State<Dashboard> {
           // By default, show a loading spinner.
           return CircularProgressIndicator();
         },
-      ),
+      ),*/
       bottomNavigationBar: DefaultVars.getBottom(0 ,(int index) {
         print(index);
         setState(() {

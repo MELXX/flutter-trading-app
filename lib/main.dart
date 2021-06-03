@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
+        fontFamily: 'RobotoMono',
       ),
       home: HomePage(title: 'AI Trading Bot'),
     );
