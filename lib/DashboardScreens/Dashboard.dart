@@ -31,10 +31,42 @@ class _DashboardState extends State<Dashboard> {
       body: Column(
         children: <Widget>[
           Container(
-            child: Text(
-                'Hello,\nMr XXXXXXXXXX',
-              style: TextStyle(
-                color: Colors.black
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(5),
+            child: Card(
+              color: Colors.white,
+              elevation: 10.0,
+
+
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                    'Hello,\nMr XXXXXXXXXX',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(5),
+            child: Card(
+              color: Colors.white,
+              elevation: 10.0,
+
+              ** use fl charts **
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  'Hello,\nMr XXXXXXXXXX',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                  ),
+                ),
               ),
             ),
           ),
