@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
         fontFamily: 'RobotoMono',
       ),
+      debugShowCheckedModeBanner: false,
       home: HomePage(title: 'AI Trading Bot'),
     );
   }

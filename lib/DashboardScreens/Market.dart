@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../AppDefaults.dart';
 import 'Dashboard.dart';
 
@@ -9,159 +8,107 @@ class Market extends StatefulWidget {
 }
 
 class _MarketState extends State<Market> {
-  var _selectedIndex = 1;
-
   @override
   Widget build(BuildContext context) {
-    String dropdownValue = 'XRPUSD';
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 10,
-        elevation: 0,
-        leading: Container(
-          child: DropdownButton<String>(
-            isExpanded: true,
-            value: dropdownValue,
-            icon: const Icon(Icons.arrow_downward),
-            iconSize: 24,
-            elevation: 16,
-            style: const TextStyle(color: Colors.black),
-
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-              });
+        elevation: 10,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add_alert),
+            tooltip: 'Go to the next page',
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute<void>(
+                builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: const Text('Next page'),
+                    ),
+                    body: const Center(
+                      child: Text(
+                        'This is the next page',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  );
+                },
+              ));
             },
-            items: <String>['XRPUSD', 'DOGEUSD', 'ETHUSD', 'XLMUSD']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
           ),
-        ),
-        //title: Text(DefaultVars.AppTitle),
+          IconButton(
+            icon: const Icon(Icons.star),
+            tooltip: 'Go to the next page',
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute<void>(
+                builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: const Text('Next page'),
+                    ),
+                    body: const Center(
+                      child: Text(
+                        'This is the next page',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  );
+                },
+              ));
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Go to the next page',
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute<void>(
+                builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: const Text('Next page'),
+                    ),
+                    body: const Center(
+                      child: Text(
+                        'This is the next page',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  );
+                },
+              ));
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.dashboard),
+            tooltip: 'Go to the next page',
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute<void>(
+                builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: const Text('Next page'),
+                    ),
+                    body: const Center(
+                      child: Text(
+                        'This is the next page',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  );
+                },
+              ));
+            },
+          ),
+        ],
       ),
       backgroundColor: DefaultVars.AppBackground,
       body: Column(
         children: <Widget>[
-           Row(
-              children: <Widget>[
-
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text("ALL", style: TextStyle(fontSize: 25)),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(DefaultVars.BtnColor),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text("FAV", style: TextStyle(fontSize: 25)),
-                  style: ButtonStyle(
-                    backgroundColor:
-                    MaterialStateProperty.all<Color>(DefaultVars.BtnColor),
-                    foregroundColor:
-                    MaterialStateProperty.all<Color>(Colors.black),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text("MARKET", style: TextStyle(fontSize: 25)),
-                  style: ButtonStyle(
-                    backgroundColor:
-                    MaterialStateProperty.all<Color>(DefaultVars.BtnColor),
-                    foregroundColor:
-                    MaterialStateProperty.all<Color>(Colors.black),
-                  ),
-                ),
-              ],
-            ),
-          /*ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor:
-              MaterialStateProperty.all<Color>(DefaultVars.BtnColor),
-              foregroundColor:
-              MaterialStateProperty.all<Color>(Colors.black),
-            ),
-            onPressed: (){},
-            child: DropdownButton<String>(
-              value: dropdownValue,
-              icon: const Icon(Icons.arrow_downward),
-              iconSize: 24,
-              elevation: 16,
-              style: const TextStyle(color: Colors.black),
-
-              onChanged: (String? newValue) {
-                setState(() {
-                  dropdownValue = newValue!;
-                });
-              },
-              items: <String>['XRPUSD', 'DOGEUSD', 'ETHUSD', 'XLMUSD']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-          ),*/
-          Card(
-            elevation: 10.0,
-            child: Row(
-              children: <Widget>[
-                Text("...........")
-              ],
-            ),
-          ),
-          Card(
-            child: Row(
-              children: <Widget>[
-                Text("...........")
-              ],
-            ),
-          ),
-          Card(
-            child: Row(
-              children: <Widget>[
-                Text("...........")
-              ],
-            ),
-          ),
-          Card(
-            child: Row(
-              children: <Widget>[
-                Text("XRPUSD: 0.0111236"),//DefaultVars.priceData[0]),
-                ImageIcon(
-                  Image(
-                    image: AssetImage('Assets/coin-exchange-2427.png'),
-                   // width: MediaQuery.of(context).size.width * 0.45,
-                   // height: MediaQuery.of(context).size.width * 0.45,
-                  ).image
-                ),
-                TextButton(onPressed: (){}, child: Text(""),style: ButtonStyle(
-                  side: MaterialStateProperty.all<BorderSide>(
-                      BorderSide(color: Colors.black)),
-                  backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.red),
-                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                  textStyle: MaterialStateProperty.all<TextStyle>(
-                      TextStyle(fontSize: 25)),
-
-                ),)
-              ],
-            ),
-          ),
         ],
       ),
       bottomNavigationBar: DefaultVars.getBottom(1, (int index) {
         print(index);
         setState(() {
-          _selectedIndex = index;
 
           switch (index) {
             case 0:

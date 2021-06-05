@@ -56,16 +56,13 @@ class _DashboardState extends State<Dashboard> {
             child: Card(
               color: Colors.white,
               elevation: 10.0,
-
-              ** use fl charts **
+              //** use fl charts **
               child: Container(
                 padding: EdgeInsets.all(10),
-                child: Text(
-                  'Hello,\nMr XXXXXXXXXX',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                  ),
+                child: Image(
+                  image: AssetImage('Assets/pie chart.png'),
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: MediaQuery.of(context).size.width * 0.45,
                 ),
               ),
             ),
