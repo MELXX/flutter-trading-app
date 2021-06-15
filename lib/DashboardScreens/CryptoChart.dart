@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app3/DashboardScreens/CryptoChart.dart';
+
 import '../AppDefaults.dart';
 import 'Dashboard.dart';
+import 'Market.dart';
 
-class Market extends StatefulWidget {
+class CryptoChart extends StatefulWidget {
   @override
-  _MarketState createState() => _MarketState();
+  _CryptoChartState createState() => _CryptoChartState();
 }
 
-class _MarketState extends State<Market> {
+class _CryptoChartState extends State<CryptoChart> {
   @override
   Widget build(BuildContext context) {
+    var isSelected = [
+      false,false,false
+    ];
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 10,
@@ -105,117 +109,54 @@ class _MarketState extends State<Market> {
       backgroundColor: DefaultVars.AppBackground,
       body: Column(
         children: <Widget>[
-          Card(
-              color: Colors.white,
-              elevation: 10.0,
-              //** use fl charts **
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width * 0.45,
-                padding: EdgeInsets.all(5),
-                child: ListTile(
-                  contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                  leading: ImageIcon(
-                    AssetImage('Assets/btc.png'),
-
-                  ),
-                  title: Text("Bitcoin\nBTC"),
-                  trailing: Text("Current Price\n\$35000,60"),
-                  onTap: (){},
-                ),
-            ),
-          ),
-          Card(
-            color: Colors.white,
-            elevation: 10.0,
-            //** use fl charts **
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(5),
-              child: ListTile(
-                contentPadding:
-                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                leading: Image(
-                  image: AssetImage('ripple_xrp.png'),
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  height: MediaQuery.of(context).size.width * 0.45,
-                ),
-                title: Text("Ripple\nXRP"),
-                trailing: Text("Current Price\n\$0,90"),
-                onTap: (){},
+          Row(
+            children: <Widget>[
+              Text("373.66\n3336"),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.30),
+                child: Text("High\n3000.60"),
               ),
-            ),
-          ),
-          Card(
-            color: Colors.white,
-            elevation: 10.0,
-            //** use fl charts **
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(5),
-              child: ListTile(
-                contentPadding:
-                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                leading: Image(
-                  image: AssetImage('doge.png'),
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  height: MediaQuery.of(context).size.width * 0.45,
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.10),
+                  child: Text("Low\n55000000.60"),
                 ),
-                title: Text("Dogecoin\nDODGE"),
-                trailing: Text("Current Price\n\$0,60"),
-                onTap: (){},
               ),
-            ),
+            ],
           ),
-          Card(
-            color: Colors.white,
-            elevation: 10.0,
-            //** use fl charts **
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(5),
-              child: ListTile(
-                contentPadding:
-                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                leading: Image(
-                  image: AssetImage('btc.png'),
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  height: MediaQuery.of(context).size.width * 0.45,
-                ),
-                title: Text("Etherum\nETH"),
-                trailing: Text("Current Price\n\$1000"),
-                onTap: (){},
-              ),
-            ),
+          ToggleButtons(
+            children: <Widget>[
+              Icon(Icons.ac_unit),
+              Icon(Icons.call),
+              Icon(Icons.cake),
+            ],
+            onPressed: (int index) {
+              setState(() {
+                isSelected[index] = !isSelected[index];
+              });
+            },
+            isSelected: isSelected,
           ),
-          Card(
-            color: Colors.white,
-            elevation: 10.0,
-            //** use fl charts **
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(5),
-              child: ListTile(
-                contentPadding:
-                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                leading: Image(
-                  image: AssetImage('ltc.png'),
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  height: MediaQuery.of(context).size.width * 0.45,
-                ),
-                title: Text("Litecoin\nLTC"),
-                trailing: Text("Current Price\n\$1000,60"),
-                onTap: (){},
-              ),
-            ),
+          ToggleButtons(
+            children: <Widget>[
+              Icon(Icons.ac_unit),
+              Icon(Icons.call),
+              Icon(Icons.cake),
+            ],
+            onPressed: (int index) {
+              setState(() {
+                isSelected[index] = !isSelected[index];
+              });
+            },
+            isSelected: isSelected,
           ),
         ],
       ),
       bottomNavigationBar: DefaultVars.getBottom(1, (int index) {
         print(index);
         setState(() {
-
           switch (index) {
             case 0:
               Navigator.of(context)
