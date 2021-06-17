@@ -23,8 +23,92 @@ environment:
 dependencies:
   firebase_auth: ^1.3.0
   fl_chart: ^0.36.1
+  url_launcher: ^6.0.2
+  path_provider: ^2.0.1
+  path_provider_macos: ^2.0.0
+  desktop_window: 0.4.0
+  syncfusion_flutter_charts: ^19.1.69+1
+
+
+#  syncfusion_flutter_datagrid:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_datagrid
+#
+#
+#  syncfusion_flutter_calendar:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_calendar
+#
+#
+#  syncfusion_flutter_datepicker:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_datepicker
+#
+#
+#  syncfusion_flutter_charts:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_charts
+#
+#
+#  syncfusion_flutter_gauges:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_gauges
+#
+#
+#  syncfusion_flutter_sliders:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_sliders
+#
+#
+#  syncfusion_flutter_pdf:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_pdf
+#
+#
+#  syncfusion_flutter_barcodes:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_barcodes
+#
+#
+#  syncfusion_officechart:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_officechart
+#
+#
+#  syncfusion_flutter_maps:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_maps
+#
+#
+#  syncfusion_flutter_signaturepad:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_signaturepad
+#
+#
+#  syncfusion_flutter_pdfviewer:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_pdfviewer\syncfusion_flutter_pdfviewer
+#
+#
+#  syncfusion_flutter_treemap:
+#
+#
+#    path: C:\Program Files (x86)\Syncfusion\Essential Studio\Flutter\19.1.0.63\Packages\flutter_treemap
   flutter:
     sdk: flutter
+
 
 
   # The following adds the Cupertino Icons font to your application.
