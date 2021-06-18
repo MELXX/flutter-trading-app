@@ -15,7 +15,7 @@ class CryptoChart extends StatefulWidget {
 }
 
 class _CryptoChartState extends State<CryptoChart> {
-  var isSelectedIndicator = [false, false, false, false, false, false];
+  var isSelectedIndicator = [false, false, false, false, false, false, false];
   var isSelectedTime = [false, false, false, false, false, false];
 
   late List<ChartData> _sampleData = [];
@@ -25,21 +25,15 @@ class _CryptoChartState extends State<CryptoChart> {
     HttpClient client = new HttpClient();
     var v = client
         .getUrl(Uri.parse(
-            "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&startTime=1223944113110&endTime=1723944113110&limit=10"))
+            "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1223944113110&endTime=1723944113110&limit=100"))
         .then((HttpClientRequest request) {
       return request.close();
     }).then((HttpClientResponse response) {
       response.transform(utf8.decoder).listen((contents) {
         List<dynamic> data = jsonDecode(contents);
-
-        //_sampleData = [];
-
         data.forEach((element) {
-          List<dynamic> temp = element;
-
           DateTime date =
               DateTime.fromMillisecondsSinceEpoch(element[6] * 1000);
-
           _sampleData.add(new ChartData(
             x: date,
             high: num.parse(element[2]),
@@ -47,19 +41,9 @@ class _CryptoChartState extends State<CryptoChart> {
             open: num.parse(element[1]),
             close: num.parse(element[4]),
           ));
-
-          /*temp.forEach((element2) {
-            print(element2);
-          });
-
-          print('........................');*/
         });
-
-        //print(data[0][0]);
       });
     });
-
-    //_sampleData = ........ TO DO SET DATA
     super.initState();
   }
 
@@ -206,24 +190,76 @@ class _CryptoChartState extends State<CryptoChart> {
                   series: <ChartSeries>[
                     // Renders CandleSeries
                     CandleSeries<ChartData, DateTime>(
+                      name: 'coin-price-data',
                       dataSource: _sampleData,
                       xValueMapper: (ChartData data, _) => data.x,
                       lowValueMapper: (ChartData data, _) => data.low,
                       highValueMapper: (ChartData data, _) => data.high,
                       openValueMapper: (ChartData data, _) => data.open,
                       closeValueMapper: (ChartData data, _) => data.close,
+                      trendlines: <Trendline>[
+                        if (isSelectedIndicator[0])
+                          Trendline(
+                              type: TrendlineType.movingAverage,
+                              color: Colors.blue),
+                      ],
                     ),
                   ],
                   primaryXAxis: DateTimeAxis(),
+                  indicators: <TechnicalIndicators<ChartData, DateTime>>[
+                    BollingerBandIndicator<ChartData, DateTime>(
+                        period: 3,
+                        seriesName:  'coin-price-data',
+                      dataSource: _sampleData,
+                      xValueMapper: (ChartData data, _) => data.x,
+                      closeValueMapper: (ChartData data, _) => data.close,
+                      isVisible: isSelectedIndicator[2],
+                    ),
+                      EmaIndicator<ChartData, DateTime>(
+                        seriesName: 'coin-price-data',
+                        valueField: 'high',
+                        isVisible: isSelectedIndicator[1],
+                        dataSource: _sampleData,
+                        xValueMapper: (ChartData data, _) => data.x,
+                        lowValueMapper: (ChartData data, _) => data.low,
+                        highValueMapper: (ChartData data, _) => data.high,
+                        openValueMapper: (ChartData data, _) => data.open,
+                        closeValueMapper: (ChartData data, _) => data.close,
+                      ),
+                    RsiIndicator<ChartData, DateTime>(
+                        period: 3,
+                        overbought: 70,
+                        oversold: 30,
+                        isVisible: isSelectedIndicator[4],
+                        dataSource: _sampleData,
+                        closeValueMapper: (ChartData data, _) => data.close,
+                        xValueMapper: (ChartData data, _) => data.x,
+                        seriesName: 'coin-price-data'
+                    ),
+                      MacdIndicator<ChartData, DateTime>(
+                          longPeriod: 5,
+                          shortPeriod: 2,
+                          dataSource: _sampleData,
+                          isVisible: isSelectedIndicator[5],
+                          closeValueMapper: (ChartData data, _) => data.close,
+                          xValueMapper: (ChartData data, _) => data.x,
+                          seriesName: 'coin-price-data')
+                  ],
                 ),
+                isSelectedIndicator[0]
+                    ? Container(
+                        child: Card(),
+                      )
+                    : Container(),
                 ToggleButtons(
                   borderRadius: BorderRadius.circular(30),
                   children: <Widget>[
-                    Text("MA"),
-                    Text("EMA"),
-                    Text("BOL"),
+                    Text("MA"), //--
+                    Text("EMA"), //--
+                    Text("BOL"), //
                     Text("VOL"),
-                    Text("RSI"),
+                    Text("RSI"), //--
+                    Text("MACD"), //--
                     Text("KDJ"),
                   ],
                   onPressed: (int index) {
@@ -235,12 +271,12 @@ class _CryptoChartState extends State<CryptoChart> {
                 ),
                 Row(
                   children: <Widget>[
-                    isSelectedIndicator[0] ? Expanded(
+                    Expanded(
                       child: ElevatedButton(
                         onPressed: () {},
                         child: Text('LONG'),
                       ),
-                    ): Container(),
+                    ),
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {},
@@ -249,6 +285,7 @@ class _CryptoChartState extends State<CryptoChart> {
                     ),
                   ],
                 ),
+                Table()
               ],
             ),
           ),
