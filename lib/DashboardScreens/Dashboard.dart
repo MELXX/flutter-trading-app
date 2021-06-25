@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_app3/DashboardScreens/CryptoChart.dart';
+import 'package:flutter_app3/DashboardScreens/trade.dart';
 import '../AppDefaults.dart';
 import 'Market.dart';
 
@@ -117,16 +119,20 @@ class _DashboardState extends State<Dashboard> {
 
           switch(index){
             case 0:
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Dashboard()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Dashboard()));
               break;
             case 1:
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Market()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Market()));
               break;
             case 2:
-            // do something
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => CryptoChart()));
               break;
             case 3:
-            // do something else
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Trade()));
               break;
             case 4:
             // do something else

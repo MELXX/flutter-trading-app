@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app3/DashboardScreens/CryptoChart.dart';
+import 'package:flutter_app3/DashboardScreens/trade.dart';
 import '../AppDefaults.dart';
 import 'Dashboard.dart';
 
@@ -214,10 +215,11 @@ class _MarketState extends State<Market> {
                   .push(MaterialPageRoute(builder: (context) => CryptoChart()));
               break;
             case 3:
-              // do something else
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Trade()));
               break;
             case 4:
-              // do something else
+            // do something else
               break;
           }
         });

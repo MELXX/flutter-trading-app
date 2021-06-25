@@ -187,6 +187,11 @@ class _CryptoChartState extends State<CryptoChart> {
                   isSelected: isSelectedTime,
                 ),
                 SfCartesianChart(
+                  zoomPanBehavior: ZoomPanBehavior(
+                    enablePinching: true,
+                    zoomMode: ZoomMode.x,
+                    enablePanning: true,
+                  ),
                   series: <ChartSeries>[
                     // Renders CandleSeries
                     CandleSeries<ChartData, DateTime>(
@@ -291,7 +296,7 @@ class _CryptoChartState extends State<CryptoChart> {
           ),
         ],
       ),
-      bottomNavigationBar: DefaultVars.getBottom(1, (int index) {
+      bottomNavigationBar: DefaultVars.getBottom(2, (int index) {
         print(index);
         setState(() {
           switch (index) {
